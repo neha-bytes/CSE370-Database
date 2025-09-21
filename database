@@ -1,0 +1,121 @@
+#DATABASE
+
+#USER TABLE:
+
+CREATE TABLE User (
+    UserID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Email VARCHAR(100) UNIQUE NOT NULL,
+    Phone VARCHAR(15),
+    Role ENUM('Admin', 'Donor', 'Volunteer', 'Supervisor') NOT NULL,
+    Password VARCHAR(255) NOT NULL,
+    LocationID INT,  -- Added LocationID column
+    FOREIGN KEY (LocationID) REFERENCES Location(LocationID)  -- Foreign key relationship with Location table
+);
+
+
+#EVENT TABLE:
+
+CREATE TABLE Event (
+    EventID INT AUTO_INCREMENT PRIMARY KEY,
+    EventName VARCHAR(100) NOT NULL,
+    LocationID INT NOT NULL,
+    Date DATE NOT NULL,
+    StartTime TIME NOT NULL,
+    EndTime TIME NOT NULL,
+    Status ENUM('Active', 'Closed') DEFAULT 'Active',
+    CreatedBy INT NOT NULL,
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, 
+    FOREIGN KEY (LocationID) REFERENCES Location(LocationID),
+    FOREIGN KEY (CreatedBy) REFERENCES User(UserID)
+);
+
+
+
+
+
+#LOCATION TABLE:
+
+CREATE TABLE Location (
+    LocationID INT AUTO_INCREMENT PRIMARY KEY,
+    City VARCHAR(100) NOT NULL,
+    State VARCHAR(50) NOT NULL,
+    ZipCode VARCHAR(10) NOT NULL,
+    RoadNo VARCHAR(50) NOT NULL,
+    HouseNo VARCHAR(50) NOT NULL
+);
+
+
+#Organization Table:
+
+CREATE TABLE Organization (
+    OrganizationID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    HouseNo VARCHAR(20) NOT NULL,
+    RoadNo VARCHAR(100) NOT NULL, 
+    LocationID INT NOT NULL, -- Link to the Location table
+    FOREIGN KEY (LocationID) REFERENCES Location(LocationID)
+);
+
+
+#Supervisor Table:
+
+CREATE TABLE Supervisor (
+    SupervisorID INT AUTO_INCREMENT PRIMARY KEY,
+    UserID INT NOT NULL,
+    OrganizationID INT NOT NULL,
+    TotalPeople INT NOT NULL,
+    RequiredStorageCapacity INT NOT NULL,
+    FOREIGN KEY (UserID) REFERENCES User(UserID),
+    FOREIGN KEY (OrganizationID) REFERENCES Organization(OrganizationID)
+);
+
+
+#EVENTSUPERVISOR TABLE:
+
+CREATE TABLE EventSupervisor (
+    EventID INT NOT NULL,
+    SupervisorID INT NOT NULL,
+    DeliveryTime TIME NOT NULL,
+    PRIMARY KEY (EventID, SupervisorID),
+    FOREIGN KEY (EventID) REFERENCES Event(EventID),
+    FOREIGN KEY (SupervisorID) REFERENCES supervisor(SupervisorID)
+);
+
+
+
+#EVENTDONORS TABLE:
+
+CREATE TABLE EventDonors (
+    EventID INT NOT NULL,
+    DonorID INT NOT NULL,
+    PickupTime TIME NOT NULL,
+    PRIMARY KEY (EventID, DonorID),
+    FOREIGN KEY (EventID) REFERENCES Event(EventID),
+    FOREIGN KEY (DonorID) REFERENCES User(UserID)
+);
+
+#Event Volunteers table:
+
+CREATE TABLE EventVolunteers (
+    EventID INT NOT NULL,
+    VolunteerID INT NOT NULL,
+    Strikes INT DEFAULT 0,
+    PRIMARY KEY (EventID, VolunteerID),
+    FOREIGN KEY (EventID) REFERENCES Event(EventID),
+    FOREIGN KEY (VolunteerID) REFERENCES User(UserID)
+);
+
+
+       
+#DonorStorage Table:
+
+CREATE TABLE DonorStorage (
+    StorageID INT AUTO_INCREMENT PRIMARY KEY,
+    LocationID INT NOT NULL,
+    DonorID INT NOT NULL,
+    Quantity INT NOT NULL,
+    FOREIGN KEY (DonorID) REFERENCES User(UserID),
+    FOREIGN KEY (LocationID) REFERENCES Location(LocationID)
+);
