@@ -1,0 +1,242 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* Body Styling */
+body {
+    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container Styling */
+.container {
+    background: #fff;
+    max-width: 450px;
+    width: 90%;
+    padding: 1.5rem;
+    margin: 20px auto;
+    border-radius: 10px;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Styling */
+form {
+    margin: 0 2rem;
+}
+
+.form-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 1.3rem;
+    margin-bottom: 1rem;
+    color: hsl(327, 90%, 28%);
+}
+
+/* Input Styling */
+input {
+    color: inherit;
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #757575;
+    padding-left: 1.5rem;
+    padding-bottom: 8px;
+    font-size: 15px;
+    transition: 0.3s ease;
+}
+
+.input-group {
+    padding: 1% 0;
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.input-group i {
+    position: absolute;
+    color: black;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+input:focus {
+    outline: none;
+    border-bottom: 2px solid hsl(327, 90%, 28%);
+}
+
+input::placeholder {
+    color: transparent;
+}
+
+label {
+    color: #757575;
+    position: absolute;
+    left: 1.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: text;
+    transition: 0.3s ease all;
+}
+
+input:focus ~ label,
+input:not(:placeholder-shown) ~ label {
+    top: -1.3em;
+    color: hsl(327, 90%, 28%);
+    font-size: 13px;
+}
+
+/* Select Styling */
+select {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #757575;
+    padding: 8px 1.5rem;
+    font-size: 15px;
+    color: #757575;
+    cursor: pointer;
+    appearance: none;
+    position: relative;
+}
+
+select:focus {
+    outline: none;
+    border-bottom: 2px solid hsl(327, 90%, 28%);
+}
+
+select option {
+    background-color: #fff;
+    color: #333;
+    font-size: 15px;
+    padding: 5px;
+}
+
+/* Add custom dropdown arrow */
+select {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23757575'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E")
+        no-repeat right 10px center;
+    background-size: 12px;
+}
+
+/* Recover Section */
+.recover {
+    text-align: right;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.recover a {
+    text-decoration: none;
+    color: rgb(125, 125, 235);
+}
+
+.recover a:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+/* Button Styling */
+.btn {
+    font-size: 1.1rem;
+    padding: 10px 0;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    width: 100%;
+    background: rgb(125, 125, 235);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn:hover {
+    background: #07001f;
+}
+
+/* OR Section */
+.or {
+    font-size: 1.1rem;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+/* Icons Section */
+.icons {
+    text-align: center;
+}
+
+.icons i {
+    color: rgb(125, 125, 235);
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    border: 2px solid #dfe9f5;
+    margin: 0 15px;
+    transition: 0.3s ease;
+}
+
+.icons i:hover {
+    background: #07001f;
+    font-size: 1.6rem;
+    border: 2px solid rgb(125, 125, 235);
+}
+
+/* Links Section */
+.links {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 4rem;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+button {
+    color: rgb(125, 125, 235);
+    border: none;
+    background-color: transparent;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    text-decoration: underline;
+    color: blue;
+}
+
+/* User-Type Specific Fields */
+.user-type-specific {
+    display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    form {
+        margin: 0 1rem;
+    }
+
+    .links {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    button {
+        font-size: 1rem;
+    }
+}
